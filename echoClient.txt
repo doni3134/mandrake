@@ -1,0 +1,39 @@
+package JKC03;
+import java.io.*;
+import java.net.*;
+
+public class EchoClient{
+        public static void main(String[] args) Throws IOException {
+                Soket client =null;
+                PrintWriter out = null;
+		                
+
+                try {
+                        client = new Socet();
+			System.out.println("echo Server연결 시도...");
+			client.connect(new InetSocketAddress("localhost",5000),3000);
+			System.out.println("echo server 연결 성공");
+
+                } catch (Exception e) {
+                }
+
+                out = new PrintWriter(client.getOutputStream(),true);
+
+		Scanner in = new Scanner(System.in);
+
+                String msg;
+
+                System.out,print("보낼 메세지가 있나요?");
+		while ((msg = in.nextLine()) != null) {
+                        if (msg.contains("bye"))
+                                break;
+                        System.out.print("보낼 메시지가 더 있나요?");
+                }
+
+                System.out.println("Client Out!");
+                out.close();
+                in.close();
+                client.close();
+        }
+}
+
