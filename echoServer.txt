@@ -1,0 +1,43 @@
+package JKC03;
+import java.io.*;
+import java.net.*;
+
+public class Echo1Server{
+	public static void main(String[] args) Throws IOException {
+		ServerSoket server =null;
+		Socet connection = null;
+		BufferedReader in = null;
+
+		try {
+			server = new ServerSocet(5000);
+		} catch (IOException e) {
+		}
+
+		System.out.println("연결 대기중....");
+
+		try{
+			connection = server.accept();
+		} catch( IOException e) {
+		}
+
+		System.out.println("메세지를 기다리는 중 ...");
+
+		in = new BufferedReader(new InputStreamReader(connection.getInputStream));
+
+		String msg;
+		while ((msg = in.readLine()) != null) {
+			if (msg.contains("bye"))
+				break;
+			System.out.println("읽은 메시지 메아리 : " + msg);
+		}
+
+		System.out.println("System Log-out!");
+		in.close();
+		connection.close();
+		server.close();
+	}
+}
+
+
+
+
